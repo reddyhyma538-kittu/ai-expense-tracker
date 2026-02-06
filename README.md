@@ -50,11 +50,15 @@ A modern, full-stack **AI-powered Expense Tracking System** built with **Python,
 ## 📸 Screenshots  
 👉 Upload your screenshots using GitHub → Drag & drop into README.
 
-Example format (replace links):---
+Example format (replace links):---![ADD EXPENSE](https://github.com/user-attachments/assets/72752e9c-d0a0-4aad-894e-f72b3b79a3c5)
+![AI-TRACKER](https://github.com/user-attachments/assets/3ebb2722![FULL IMAGE WITH CHARTS AND BARGRAPH](https://github.com/user-attachments/assets/69cf4559-d429-47c8-9f0e-91cd81d0b08b)
+-9e35-44cf-b08e-d6679b0c3e54)
+
 
 ## ⚙️ Installation
 
-```bash
+```bash!
+
 # Clone the repository
 git clone https://github.com/<your-username>/ai-expense-tracker.git
 
