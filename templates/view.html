@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>All Expenses</h2>
+
+<table>
+    <tr>
+        <th>ID</th><th>Date</th><th>Amount</th><th>Description</th><th>Category</th>
+        <th>Edit</th><th>Delete</th>
+    </tr>
+
+    {% for e in expenses %}
+    <tr>
+        <td>{{ e[0] }}</td>
+        <td>{{ e[1] }}</td>
+        <td>{{ e[2] }}</td>
+        <td>{{ e[3] }}</td>
+        <td>{{ e[4] }}</td>
+
+        <td><a href="/edit/{{ e[0] }}">Edit</a></td>
+        <td><a href="/delete/{{ e[0] }}">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

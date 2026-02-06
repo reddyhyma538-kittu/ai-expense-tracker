@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Summary</h2>
+
+<h3>Monthly Totals</h3>
+<table>
+    <tr><th>Month</th><th>Total</th></tr>
+    {% for m,t in monthly_totals.items() %}
+    <tr><td>{{ m }}</td><td>{{ t }}</td></tr>
+    {% endfor %}
+</table>
+
+<h3>Category Totals</h3>
+<table>
+    <tr><th>Category</th><th>Total</th></tr>
+    {% for c,t in category_totals.items() %}
+    <tr><td>{{ c }}</td><td>{{ t }}</td></tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

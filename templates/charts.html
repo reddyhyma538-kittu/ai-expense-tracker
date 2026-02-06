@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Charts</title>
+    <style>
+        body {
+            background: #0d1b2a;
+            color: white;
+            font-family: Poppins, sans-serif;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .chart-box {
+            width: 350px;        /* Smaller size */
+            height: 350px;
+            background: #1b263b;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 10px #00000055;
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<h1>Charts</h1>
+
+<div class="chart-container">
+
+    <!-- Monthly Bar Chart -->
+    <div class="chart-box">
+        <canvas id="bar"></canvas>
+    </div>
+
+    <!-- Category Pie Chart -->
+    <div class="chart-box">
+        <canvas id="pie"></canvas>
+    </div>
+
+</div>
+
+<script>
+    // BAR CHART
+    new Chart(document.getElementById("bar"), {
+        type: "bar",
+        data: {
+            labels: {{ months | safe }},
+            datasets: [{
+                label: "Monthly Spending",
+                data: {{ month_values | safe }},
+                backgroundColor: "#00b4d8"
+            }]
+        }
+    });
+
+    // PIE CHART
+    new Chart(document.getElementById("pie"), {
+        type: "pie",
+        data: {
+            labels: {{ categories | safe }},
+            datasets: [{
+                data: {{ category_values | safe }},
+                backgroundColor: ["#48cae4", "#90e0ef", "#caf0f8"]
+            }]
+        }
+    });
+</script>
+
+</body>
+</html>

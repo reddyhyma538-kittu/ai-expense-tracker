@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Expense Tracker</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<!-- TOP NAVBAR -->
+<div class="navbar">
+    <div class="nav-title">AI Expense Tracker</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/view">Expenses</a>
+        <a href="/summary">Summary</a>
+        <a href="/charts">Charts</a>
+    </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Expense Tracker - One Page</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h1>AI Expense Tracker</h1>
+</div>
+
+<div class="container">
+
+    <!-- ADD EXPENSE FORM -->
+    <div class="form-card">
+        <h2>Add Expense</h2>
+
+        <form method="POST">
+
+            <input type="date" name="date" required>
+
+            <input type="number" name="amount" placeholder="Amount" required>
+
+            <input type="text" name="description" placeholder="Description" required>
+
+            <button type="submit">Add Expense</button>
+        </form>
+    </div>
+
+    <!-- SUMMARY CARDS -->
+    <h2 class="section-title">Summary</h2>
+
+    <div class="summary-row">
+
+        <div class="summary-card">
+            <h3>Total Spent</h3>
+            <h1>₹{{ expenses | sum(attribute='2') }}</h1>
+        </div>
+
+        <div class="summary-card">
+            <h3>Categories</h3>
+            <h1>{{ category_summary | length }}</h1>
+        </div>
+
+        <div class="summary-card">
+            <h3>Months Tracked</h3>
+            <h1>{{ monthly | length }}</h1>
+        </div>
+
+    </div>
+
+    <!-- EXPENSE TABLE -->
+    <div class="table-card">
+        <h2>All Expenses</h2>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Delete</th>
+            </tr>
+
+            {% for e in expenses %}
+            <tr>
+                <td>{{ e[0] }}</td>
+                <td>{{ e[1] }}</td>
+                <td>{{ e[2] }}</td>
+                <td>{{ e[3] }}</td>
+                <td>{{ e[4] }}</td>
+
+                <td><a href="/delete/{{ e[0] }}" style="color:#FF5252;">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <!-- CHARTS SECTION -->
+    <h2 class="section-title">Charts</h2>
+
+    <div class="charts-row">
+
+        <div class="chart-box">
+            <canvas id="bar"></canvas>
+        </div>
+
+        <div class="chart-box">
+            <canvas id="pie"></canvas>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CHART SCRIPT -->
+<script>
+
+    const monthlyLabels = {{ monthly.keys() | list | tojson }};
+    const monthlyValues = {{ monthly.values() | list | tojson }};
+    const catLabels = {{ category_summary.keys() | list | tojson }};
+    const catValues = {{ category_summary.values() | list | tojson }};
+
+    // BAR CHART
+    new Chart(document.getElementById("bar"), {
+        type: "bar",
+        data: {
+            labels: monthlyLabels,
+            datasets: [{
+                label: "Monthly Spending",
+                data: monthlyValues,
+                backgroundColor: "#2962FF",
+                borderColor: "#FFFFFF",
+                borderWidth: 1,
+                borderRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { color: "white" } }
+            },
+            scales: {
+                x: { ticks: { color: "white" }},
+                y: { ticks: { color: "white" }}
+            }
+        }
+    });
+
+    // PIE CHART
+    new Chart(document.getElementById("pie"), {
+        type: "pie",
+        data: {
+            labels: catLabels,
+            datasets: [{
+                data: catValues,
+                backgroundColor: [
+                    "#2962FF",
+                    "#4CAF50",
+                    "#FFC107",
+                    "#FF5252",
+                    "#9575CD"
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { color: "white" } }
+            }
+        }
+    });
+
+</script>
+
+</body>
+</html>

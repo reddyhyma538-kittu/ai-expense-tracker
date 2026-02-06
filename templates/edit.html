@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Edit Expense</h2>
+
+<form action="/update/{{ expense[0] }}" method="POST">
+    <input type="text" name="date" value="{{ expense[1] }}" required><br>
+    <input type="number" name="amount" value="{{ expense[2] }}" required><br>
+    <input type="text" name="description" value="{{ expense[3] }}" required><br>
+
+    <button class="btn">Update</button>
+</form>
+
+{% endblock %}
